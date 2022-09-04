@@ -2,6 +2,10 @@
 
 namespace Spatie\Activitylog;
 
+use App\Console\Commands\MultiTenantsListCommand;
+use App\Console\Commands\MultiTenantsLogsMigrateCommand;
+use App\Console\Commands\MultiTenantsMigrateCommand;
+use App\Console\Commands\MultiTenantsSeedCommand;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
@@ -22,7 +26,13 @@ class ActivitylogServiceProvider extends PackageServiceProvider
             'tenant_logs/exec_delete_migrations_1',
             'tenant_logs/exec_delete_migrations_2',
         ])
-        ->hasCommand(CleanActivitylogCommand::class);
+        ->hasCommand([
+            CleanActivitylogCommand::class,
+            MultiTenantsListCommand::class,
+            MultiTenantsLogsMigrateCommand::class,
+            MultiTenantsMigrateCommand::class,
+            MultiTenantsSeedCommand::class,
+        ]);
     }
 
     public function registeringPackage()
