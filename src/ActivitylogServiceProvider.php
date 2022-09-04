@@ -26,13 +26,11 @@ class ActivitylogServiceProvider extends PackageServiceProvider
             'tenant_logs/exec_delete_migrations_1',
             'tenant_logs/exec_delete_migrations_2',
         ])
-        ->hasCommand([
-            CleanActivitylogCommand::class,
-            MultiTenantsListCommand::class,
-            MultiTenantsLogsMigrateCommand::class,
-            MultiTenantsMigrateCommand::class,
-            MultiTenantsSeedCommand::class,
-        ]);
+        ->hasCommand(CleanActivitylogCommand::class)
+        ->hasCommand(MultiTenantsListCommand::class)
+        ->hasCommand(MultiTenantsLogsMigrateCommand::class)
+        ->hasCommand(MultiTenantsMigrateCommand::class)
+        ->hasCommand(MultiTenantsSeedCommand::class);
     }
 
     public function registeringPackage()
