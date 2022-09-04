@@ -68,19 +68,30 @@ php artisan multi_tenants_logs:migrate
 It should be executed when the objective is to run migrations only for the main tenants.
 
 ```bash
-php artisan multi_tenants_logs:migrate_for_tenant_main
+php artisan multi_tenants:list
 ```
-## Warinig
+> This command lists all tenants in the system
+
+```bash
+php artisan multi_tenants:migrate
+```
+> Has `--tenants` option to run for a specific tenant
+
+```bash
+php artisan multi_tenants:seed
+```
+> Has `--class` and `--tenants` option to run for a specific tenant
+
+## Warning
 
 It is extremely discouraged to continue to use the native commands from the [Tenancy for Laravel](https://tenancyforlaravel.com/) package.
 
 For example:
     
 ```bash
+// This command does not differentiate between the main tenant and the log tenant
 
 php artisan tenants:migrate
-
-// This command does not differentiate between the main tenant and the log tenant
 ```
 
 Because it is not making any difference between main tenant and log tenant, it would be at your own risk to run migrations from different migration directories (some more basic validations were implemented to prevent these types of errors, but only if you use the native commands of this one package).
