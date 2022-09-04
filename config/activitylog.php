@@ -34,8 +34,10 @@ return [
      * This model will be used to log activity.
      * It should implement the Spatie\Activitylog\Contracts\Activity interface
      * and extend Illuminate\Database\Eloquent\Model.
+     * 
+     * Use the MutiActivity model for implementation with the LaravelMultiTenancy package
      */
-    'activity_model' => \Spatie\Activitylog\Models\Activity::class,
+    'activity_model' => \Spatie\Activitylog\Models\MutiActivity::class,
 
     /*
      * This is the name of the table that will be created by the migration and
