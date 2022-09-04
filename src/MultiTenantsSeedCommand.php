@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace CeruttiMaicon\Commands;
 
 use Illuminate\Console\Command;
 

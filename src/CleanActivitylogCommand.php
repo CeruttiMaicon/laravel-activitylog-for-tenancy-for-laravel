@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Activitylog;
+namespace CeruttiMaicon\Activitylog;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
