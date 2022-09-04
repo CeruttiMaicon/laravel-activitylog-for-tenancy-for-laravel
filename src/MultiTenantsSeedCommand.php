@@ -18,7 +18,7 @@ class MultiTenantsSeedCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Seed tenant database(s) main(s).';
+    protected $description = 'Seed tenant database(s) main(s)';
 
     /**
      * Execute the console command.

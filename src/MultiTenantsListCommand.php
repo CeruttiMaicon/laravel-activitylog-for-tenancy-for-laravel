@@ -18,7 +18,7 @@ class MultiTenantsListCommand extends Command
      *
      * @var string
      */
-    protected $description = 'List tenants.';
+    protected $description = 'List tenants';
 
     /**
      * Execute the console command.

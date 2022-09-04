@@ -16,7 +16,7 @@ class CleanActivitylogCommand extends Command
                             {--days= : (optional) Records older than this number of days will be cleaned.}
                             {--force : (optional) Force the operation to run when in production.}';
 
-    protected $description = 'Clean up old records from the activity log.';
+    protected $description = 'Clean up old records from the activity log';
 
     public function handle()
     {
