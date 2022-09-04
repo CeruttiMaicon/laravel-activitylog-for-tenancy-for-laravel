@@ -40,13 +40,19 @@ return [
     /*
      * This is the name of the table that will be created by the migration and
      * used by the Activity model shipped with this package.
+     * 
+     * The parameter in the configuration must be null so that the 
+     * Activity model identifies each table according to its 
+     * main tenant log table
      */
-    'table_name' => 'activity_log',
+    'table_name' => null,
 
     /*
      * This is the database connection that will be used by the migration and
      * the Activity model shipped with this package. In case it's not set
      * Laravel's database.default will be used instead.
+     * 
+     * The connection must be the same as the one used in the primary tenant
      */
-    'database_connection' => env('ACTIVITY_LOGGER_DB_CONNECTION'),
+    'database_connection' => null,
 ];
