@@ -2,10 +2,6 @@
 
 namespace Spatie\Activitylog;
 
-use App\Console\Commands\MultiTenantsListCommand;
-use App\Console\Commands\MultiTenantsLogsMigrateCommand;
-use App\Console\Commands\MultiTenantsMigrateCommand;
-use App\Console\Commands\MultiTenantsSeedCommand;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
