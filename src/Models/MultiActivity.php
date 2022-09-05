@@ -4,7 +4,7 @@ namespace Spatie\Activitylog\Models;
 
 use Spatie\Activitylog\Models\Activity;
 
-class MultiActivityLog extends Activity
+class MultiActivity extends Activity
 {
     private $tenant_main;
     private $tenant_log;
