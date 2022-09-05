@@ -68,8 +68,8 @@ class CleanActivitylogCommand extends Command
                 }
             }
 
+            $this->line('');
             $this->comment("Cleaning activity log for tenant_id: '{$tenant->id}'");
-
             $this->line('');
 
             $log = $this->argument('log');
