@@ -31,6 +31,8 @@ return new class () extends Migration {
         // NOTE - The migrations table must not contain logs as it follows Laravel standards
         $tables = array_diff($tables, ['migrations']);
 
+        $tables[] = 'default';
+
         tenancy()->initialize($tenantLog);
 
         foreach ($tables as $key => $table) {
