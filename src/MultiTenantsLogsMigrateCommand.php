@@ -33,10 +33,13 @@ class MultiTenantsLogsMigrateCommand extends Command
             // NOTE - If the --tenants parameter was passed, there should be no option with _logs suffix
             if (strpos($this->option('tenants'), '_logs') !== false) {
                 $this->error('Invalid tenant log name. Tenant log name cannot have _logs suffix.');
-                return 1;
             }
 
-            $tenants = $tenants->whereIn('id', explode(',', $this->option('tenants')));
+            $tenants = \App\Models\Tenant::where('id', $this->option('tenants'))->get();
+
+            if ($tenants->count() == 0) {
+                $this->error('Invalid tenant log name. Tenant log name does not exist.');
+            }
         }
 
         foreach ($tenants as $tenant) {
