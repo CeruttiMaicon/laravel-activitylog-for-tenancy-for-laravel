@@ -49,7 +49,7 @@ Compulsorily, you can publish the configuration file with:
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-config"
 ```
 
-It **is extremely important** for this package to work that `MultiActivityLog` is listed in the project configuration, it is thanks to this that the connections are switched between the main tenant and the log tenant.
+It **is extremely important** for this package to work that `MultiActivity` is listed in the project configuration, it is thanks to this that the connections are switched between the main tenant and the log tenant.
 
 ## Commands
 
