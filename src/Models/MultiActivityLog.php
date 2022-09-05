@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Spatie\Activitylog\Models;
 
 use Spatie\Activitylog\Models\Activity;
 
