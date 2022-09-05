@@ -49,7 +49,7 @@ Compulsorily, you can publish the configuration file with:
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-config"
 ```
 
-It **is extremely important** for this package to work that `MultiActivityLog` is listed in the project configuration, it is thanks to this that the connections are switched between the main tenant and the log tenant.
+It **is extremely important** for this package to work that `MultiActivity` is listed in the project configuration, it is thanks to this that the connections are switched between the main tenant and the log tenant.
 
 ## Commands
 
@@ -89,10 +89,9 @@ It is extremely discouraged to continue to use the native commands from the [Ten
 For example:
     
 ```bash
-// This command does not differentiate between the main tenant and the log tenant
-
 php artisan tenants:migrate
 ```
+> This command does not differentiate between the main tenant and the log tenant
 
 Because it is not making any difference between main tenant and log tenant, it would be at your own risk to run migrations from different migration directories (some more basic validations were implemented to prevent these types of errors, but only if you use the native commands of this one package).
 

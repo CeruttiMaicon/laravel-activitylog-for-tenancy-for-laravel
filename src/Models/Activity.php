@@ -127,10 +127,4 @@ class Activity extends Model implements ActivityContract
     {
         return $query->where('batch_uuid', $batchUuid);
     }
-
-    public function setTable($table)
-    {
-        $this->table = $table;
-        return $this;   
-    }
 }
