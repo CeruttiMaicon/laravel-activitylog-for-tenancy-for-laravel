@@ -37,7 +37,7 @@ return [
      * 
      * Use the MutiActivity model for implementation with the LaravelMultiTenancy package
      */
-    'activity_model' => \Spatie\Activitylog\Models\MutiActivity::class,
+    'activity_model' => \Spatie\Activitylog\Models\MultiActivity::class,
 
     /*
      * This is the name of the table that will be created by the migration and
