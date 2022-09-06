@@ -27,7 +27,8 @@ class MultiTenantsLogsMigrateCommand extends Command
      */
     public function handle()
     {
-        $tenants = \App\Models\Tenant::where('id', 'like', '%_logs')->get();
+        $tenantModel = config('activitylog.tenant_model');
+        $tenants = $tenantModel::where('id', 'like', '%_logs')->get();
 
         if ($this->option('tenants')) {
             // NOTE - If the --tenants parameter was passed, there should be no option with _logs suffix
@@ -35,7 +36,7 @@ class MultiTenantsLogsMigrateCommand extends Command
                 $this->error('Invalid tenant log name. Tenant log name cannot have _logs suffix.');
             }
 
-            $tenants = \App\Models\Tenant::where('id', $this->option('tenants'))->get();
+            $tenants = $tenantModel::where('id', $this->option('tenants'))->get();
 
             if ($tenants->count() == 0) {
                 $this->error('Invalid tenant log name. Tenant log name does not exist.');
