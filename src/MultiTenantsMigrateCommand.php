@@ -27,7 +27,8 @@ class MultiTenantsMigrateCommand extends Command
      */
     public function handle()
     {
-        $tenants = \App\Models\Tenant::whereNot('id', 'like', '%_logs')->get();
+        $tenantModel = config('activitylog.tenant_model');
+        $tenants = $tenantModel::whereNot('id', 'like', '%_logs')->get();
 
         if ($this->option('tenants')) {
             // NOTE - If the --tenants parameter was passed, there should be no option with _logs suffix

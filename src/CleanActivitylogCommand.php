@@ -28,8 +28,9 @@ class CleanActivitylogCommand extends Command
             return 1;
         }
 
-        $tenantsAll = \App\Models\Tenant::whereNot('id', 'like', '%_logs')->get();
-        $tenantOption = \App\Models\Tenant::where('id', $this->option('tenants'))->get();
+        $tenantModel = config('activitylog.tenant_model');
+        $tenantsAll = $tenantModel::whereNot('id', 'like', '%_logs')->get();
+        $tenantOption = $tenantModel::where('id', $this->option('tenants'))->get();
 
         $tenants = $this->option('tenants') === null
             ? $tenantsAll
@@ -68,8 +69,8 @@ class CleanActivitylogCommand extends Command
                 }
             }
 
-            $this->line('');
             $this->comment("Cleaning activity log for tenant_id: '{$tenant->id}'");
+
             $this->line('');
 
             $log = $this->argument('log');

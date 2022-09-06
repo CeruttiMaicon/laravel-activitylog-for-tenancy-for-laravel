@@ -27,7 +27,9 @@ class MultiTenantsSeedCommand extends Command
      */
     public function handle()
     {
-        $tenants = \App\Models\Tenant::whereNot('id', 'like', '%_logs')->get();
+        $tenantModel = config('activitylog.tenant_model');
+
+        $tenants = $tenantModel::whereNot('id', 'like', '%_logs')->get();
 
         if ($this->option('tenants')) {
             // NOTE - If the --tenants parameter was passed, there should be no option with _logs suffix
@@ -39,7 +41,9 @@ class MultiTenantsSeedCommand extends Command
             $tenants = $tenants->whereIn('id', explode(',', $this->option('tenants')));
         }
 
-        $class = $this->option('class') == null ? 'Database\\Seeders\\Tenants\\DatabaseTenantSeeder' : 'Database\\Seeders\\Tenants\\' . $this->option('class');
+        $tenantSeederModel = config('activitylog.tenant_seeder_model');
+
+        $class = $this->option('class') == null ? $tenantSeederModel : 'Database\\Seeders\\Tenants\\' . $this->option('class');
 
         foreach ($tenants as $tenant) {
             $this->call('tenants:seed', [
