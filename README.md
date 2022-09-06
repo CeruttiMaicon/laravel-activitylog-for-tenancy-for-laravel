@@ -35,19 +35,31 @@ php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProv
 ```
 > Yes, this command remains the same
 
+Compulsorily, you can publish the configuration file with:
+
+```bash
+php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-config"
+```
+> Note that there are some extra settings `tenant_model` and `tenant_seeder_model`. These settings are used to define the template that will be used to create the tenant and the template that will be used to create the tenant propagator. They must be met according to each project implementation.
+
+Create the databases following the prefix pattern for the main tenants:
+
+Example:
+
+```text
+tenant_main
+tenant_main_logs
+```
+
 After publishing the migration, you can run the migrations with the following command:
 
 ```bash
 php artisan multi_tenants_logs:migrate
 ```
 
+The above command also generates the records of the tenants from logs in the tenants table of the application's central database.
+
 > Note that there is a run of a seeder that truncates the migrations table. Yes, this is done on purpose, so that the tables created in the tenant logs contain the same tables as the main tenant automatically, so the developer doesn't have to recreate other migrations for this function.
-
-Compulsorily, you can publish the configuration file with:
-
-```bash
-php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-config"
-```
 
 It **is extremely important** for this package to work that `MultiActivity` is listed in the project configuration, it is thanks to this that the connections are switched between the main tenant and the log tenant.
 
