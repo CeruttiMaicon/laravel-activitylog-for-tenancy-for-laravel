@@ -4,7 +4,7 @@ namespace Spatie\Activitylog;
 
 use Illuminate\Console\Command;
 
-class MultiTenantsLogsMigrateCommand extends Command
+class MultiTenantsLogsRollbackCommand extends Command
 {
     /**
      * The name and signature of the console command.
