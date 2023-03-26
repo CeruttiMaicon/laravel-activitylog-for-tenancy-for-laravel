@@ -32,9 +32,9 @@ class MultiTenantsLogsMigrateCommand extends Command
         $tenantsMain = $tenantModel::whereNot('id', 'like', '%_logs')->get();
 
         foreach ($tenantsMain as $tenantMain) {
-            $tenantIdLogs = $tenantMain->id.'_logs';
+            $tenantIdLogs = $tenantMain->id . '_logs';
 
-            if (! $tenantModel::find($tenantIdLogs)) {
+            if (!$tenantModel::find($tenantIdLogs)) {
                 $tenantModel::create(['id' => $tenantIdLogs]);
             }
         }

@@ -171,6 +171,8 @@ class ActivityLogger
             $this->tap([$activity->subject, 'tapActivity'], $activity->event ?? '');
         }
 
+        $activity->setTable($activity->log_name);
+
         $activity->save();
 
         $this->activity = null;
