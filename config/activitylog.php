@@ -67,5 +67,4 @@ return [
      * Defining which model to run all the tenant seeds of the tenant
      */
     'tenant_seeder_model' => \Database\Seeders\Tenants\DatabaseTenantSeeder::class,
-
 ];

@@ -65,6 +65,7 @@ class CleanActivitylogCommand extends Command
             if ($verifyTable) {
                 if (! Schema::hasTable($this->option('table'))) {
                     $this->error('The table '.$this->option('table').' does not exist.');
+
                     return 1;
                 }
             }

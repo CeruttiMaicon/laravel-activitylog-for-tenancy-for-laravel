@@ -4,21 +4,21 @@ namespace Spatie\Activitylog;
 
 use Illuminate\Console\Command;
 
-class MultiTenantsLogsMigrateCommand extends Command
+class MultiTenantsLogsRollbackCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'multi_tenants_logs:migrate {--tenants= : The tenant log to be migrated}';
+    protected $signature = 'multi_tenants_logs:rollback {--tenants= : The tenant log to be migrated rollback}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run migrations for tenant(s) logs';
+    protected $description = 'Run migrations rollback for tenant(s) logs';
 
     /**
      * Execute the console command.
@@ -55,7 +55,7 @@ class MultiTenantsLogsMigrateCommand extends Command
         }
 
         foreach ($tenants as $tenant) {
-            $this->call('tenants:migrate', [
+            $this->call('tenants:rollback', [
                 '--tenants' => $tenant->id,
                 '--path' => 'database/migrations/tenant_logs',
             ]);

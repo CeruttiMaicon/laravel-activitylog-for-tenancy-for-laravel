@@ -5,6 +5,8 @@
 
 This project is a fork of `spatie/laravel-activitylog`.
 
+Now compatible with Laravel 10.
+
 What we want with this fork is to make it possible for the logs not to be centralized in a single table. Over time, all system logs end up generating a table with many records, and to alleviate this problem, the proposal here is to use the package [Tenancy for Laravel](https://tenancyforlaravel.com/) to create a second tenant , with the nomenclature having a `_logs` suffix. And so making each tenant have 2 databases.
 
 To proceed with the implementations of Logs you should still use the documentation from [Spetie Laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction).
