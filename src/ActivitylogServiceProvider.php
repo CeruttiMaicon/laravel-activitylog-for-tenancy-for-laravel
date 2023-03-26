@@ -25,7 +25,9 @@ class ActivitylogServiceProvider extends PackageServiceProvider
         ->hasCommand(CleanActivitylogCommand::class)
         ->hasCommand(MultiTenantsListCommand::class)
         ->hasCommand(MultiTenantsLogsMigrateCommand::class)
+        ->hasCommand(MultiTenantsLogsRollbackCommand::class)
         ->hasCommand(MultiTenantsMigrateCommand::class)
+        ->hasCommand(MultiTenantsRollbackCommand::class)
         ->hasCommand(MultiTenantsSeedCommand::class);
     }
 

@@ -2,8 +2,6 @@
 
 namespace Spatie\Activitylog\Models;
 
-use Spatie\Activitylog\Models\Activity;
-
 class MultiActivity extends Activity
 {
     private $tenant_main;
@@ -18,7 +16,7 @@ class MultiActivity extends Activity
         }
 
         $this->tenant_main = $tenant;
-        $this->tenant_log = $this->tenant_main . '_logs';
+        $this->tenant_log = $this->tenant_main.'_logs';
 
         tenancy()->initialize($this->tenant_log);
     }
@@ -42,11 +40,13 @@ class MultiActivity extends Activity
      * Add functionality to the model to allow it to be used as a tenant model.
      *
      * @param $table
+     *
      * @return Model
      */
     public function setTable($table)
     {
         $this->table = $table;
+
         return $this;
     }
 }
