@@ -1,95 +1,31 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
-<p align="center"><img src="/art/socialcard.png" alt="Social Card of Laravel Activity Log"></p>
-
 # Log activity inside your Laravel app
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-activitylog)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-activitylog/run-tests.yml?branch=main&label=Tests)](https://github.com/spatie/laravel-activitylog/actions/workflows/run-tests.yml)
-[![Check & fix styling](https://github.com/spatie/laravel-activitylog/workflows/Check%20&%20fix%20styling/badge.svg)](https://github.com/spatie/laravel-activitylog/actions/workflows/php-cs-fixer.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-activitylog)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/cerutti-maicon/laravel-activitylog-for-tenancy-for-laravel?style=flat-square)](https://packagist.org/packages/cerutti-maicon/laravel-activitylog-for-tenancy-for-laravel)
+[![Total Downloads](https://img.shields.io/packagist/dt/cerutti-maicon/laravel-activitylog-for-tenancy-for-laravel.svg?style=flat-square)](https://packagist.org/packages/cerutti-maicon/laravel-activitylog-for-tenancy-for-laravel)
 
-The `spatie/laravel-activitylog` package provides easy to use functions to log the activities of the users of your app. It can also automatically log model events.
-The Package stores all activity in the `activity_log` table.
+This project is a fork of `spatie/laravel-activitylog`.
 
-Here's a demo of how you can use it:
+Now compatible with Laravel 10.
 
-```php
-activity()->log('Look, I logged something');
-```
+What we want with this fork is to make it possible for the logs not to be centralized in a single table. Over time, all system logs end up generating a table with many records, and to alleviate this problem, the proposal here is to use the package [Tenancy for Laravel](https://tenancyforlaravel.com/) to create a second tenant , with the nomenclature having a `_logs` suffix. And so making each tenant have 2 databases.
 
-You can retrieve all activity using the `Spatie\Activitylog\Models\Activity` model.
+To proceed with the implementations of Logs you should still use the documentation from [Spetie Laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction).
+
+The changes in this package were that an attribute for the `useLogName` function **must always be informed**, as this attribute will define the name of the table to save the log data informed by the `getActivitylogOptions` function applied to the model.
 
 ```php
-Activity::all();
+public function getActivitylogOptions()
+{
+    return LogOptions::defaults()
+    ->useLogName('system');
+}
 ```
-
-Here's a more advanced example:
-
-```php
-activity()
-   ->performedOn($anEloquentModel)
-   ->causedBy($user)
-   ->withProperties(['customProperty' => 'customValue'])
-   ->log('Look, I logged something');
-
-$lastLoggedActivity = Activity::all()->last();
-
-$lastLoggedActivity->subject; //returns an instance of an eloquent model
-$lastLoggedActivity->causer; //returns an instance of your user model
-$lastLoggedActivity->getExtraProperty('customProperty'); //returns 'customValue'
-$lastLoggedActivity->description; //returns 'Look, I logged something'
-```
-
-Here's an example on [event logging](https://spatie.be/docs/laravel-activitylog/advanced-usage/logging-model-events).
-
-```php
-$newsItem->name = 'updated name';
-$newsItem->save();
-
-//updating the newsItem will cause the logging of an activity
-$activity = Activity::all()->last();
-
-$activity->description; //returns 'updated'
-$activity->subject; //returns the instance of NewsItem that was saved
-```
-
-Calling `$activity->changes()` will return this array:
-
-```php
-[
-   'attributes' => [
-        'name' => 'updated name',
-        'text' => 'Lorum',
-    ],
-    'old' => [
-        'name' => 'original name',
-        'text' => 'Lorum',
-    ],
-];
-```
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-activitylog.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-activitylog)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
-## Documentation
-
-You'll find the documentation on [https://spatie.be/docs/laravel-activitylog/introduction](https://spatie.be/docs/laravel-activitylog/introduction).
-
-Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the activity log? Feel free to [create an issue on GitHub](https://github.com/spatie/laravel-activitylog/issues), we'll try to address it as soon as possible.
-
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require spatie/laravel-activitylog
+composer require cerutti-maicon/laravel-activitylog-for-tenancy-for-laravel                          
 ```
 
 The package will automatically register itself.
@@ -99,51 +35,79 @@ You can publish the migration with:
 ```bash
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-migrations"
 ```
+> Yes, this command remains the same
 
-_Note_: The default migration assumes you are using integers for your model IDs. If you are using UUIDs, or some other format, adjust the format of the subject_id and causer_id fields in the published migration before continuing.
-
-After publishing the migration you can create the `activity_log` table by running the migrations:
-
-```bash
-php artisan migrate
-```
-
-You can optionally publish the config file with:
+Compulsorily, you can publish the configuration file with:
 
 ```bash
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="activitylog-config"
 ```
+> Note that there are some extra settings `tenant_model` and `tenant_seeder_model`. These settings are used to define the template that will be used to create the tenant and the template that will be used to create the tenant propagator. They must be met according to each project implementation.
 
-## Changelog
+Create the databases following the prefix pattern for the main tenants:
 
-Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes.
+Example:
 
-## Upgrading
-
-Please see [UPGRADING](UPGRADING.md) for details.
-
-## Testing
-
-```bash
-composer test
+```text
+tenant_main
+tenant_main_logs
 ```
 
-## Contributing
+After publishing the migration, you can run the migrations with the following command:
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+```bash
+php artisan multi_tenants_logs:migrate
+```
 
-## Security
+The above command also generates the records of the tenants from logs in the tenants table of the application's central database.
 
-If you've found a bug regarding security please mail [security@spatie.be](mailto:security@spatie.be) instead of using the issue tracker.
+> Note that there is a run of a seeder that truncates the migrations table. Yes, this is done on purpose, so that the tables created in the tenant logs contain the same tables as the main tenant automatically, so the developer doesn't have to recreate other migrations for this function.
 
-## Credits
+It **is extremely important** for this package to work that `MultiActivity` is listed in the project configuration, it is thanks to this that the connections are switched between the main tenant and the log tenant.
 
--   [Freek Van der Herten](https://github.com/freekmurze)
--   [Sebastian De Deyne](https://github.com/sebastiandedeyne)
--   [Tom Witkowski](https://github.com/Gummibeer)
--   [All Contributors](../../contributors)
+## Commands
 
-And a special thanks to [Caneco](https://twitter.com/caneco) for the logo and [Ahmed Nagi](https://github.com/nagi1) for all the work he put in `v4`.
+The package comes with some artisan commands to run the migrations and seeder only for the main tenants, the tenant logs should work automatically:
+
+### Migrate for Tenant Logs
+
+It must be run for each new table created in the main tenant, in order to be able to generate the logs for it.
+
+```bash
+php artisan multi_tenants_logs:migrate
+```
+
+### Migrate for Tenant Main
+
+It should be executed when the objective is to run migrations only for the main tenants.
+
+```bash
+php artisan multi_tenants:list
+```
+> This command lists all tenants in the system
+
+```bash
+php artisan multi_tenants:migrate
+```
+> Has `--tenants` option to run for a specific tenant
+
+```bash
+php artisan multi_tenants:seed
+```
+> Has `--class` and `--tenants` option to run for a specific tenant
+
+## Warning
+
+It is extremely discouraged to continue to use the native commands from the [Tenancy for Laravel](https://tenancyforlaravel.com/) package.
+
+For example:
+    
+```bash
+php artisan tenants:migrate
+```
+> This command does not differentiate between the main tenant and the log tenant
+
+Because it is not making any difference between main tenant and log tenant, it would be at your own risk to run migrations from different migration directories (some more basic validations were implemented to prevent these types of errors, but only if you use the native commands of this one package).
 
 ## License
 
