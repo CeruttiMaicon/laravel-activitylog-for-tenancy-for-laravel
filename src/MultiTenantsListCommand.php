@@ -36,7 +36,7 @@ class MultiTenantsListCommand extends Command
             return [
                 "{$database}.tenants.id" => $tenant->id,
                 'Tenant Main' => $tenant->id,
-                'Tenant Logs' => $tenant->id . '_logs',
+                'Tenant Logs' => $tenant->id.'_logs',
             ];
         })->toArray());
 

@@ -35,6 +35,7 @@ class MultiTenantsSeedCommand extends Command
             // NOTE - If the --tenants parameter was passed, there should be no option with _logs suffix
             if (strpos($this->option('tenants'), '_logs') !== false) {
                 $this->error('Invalid tenant name. Tenant name cannot have _logs suffix.');
+
                 return 1;
             }
 
@@ -43,7 +44,7 @@ class MultiTenantsSeedCommand extends Command
 
         $tenantSeederModel = config('activitylog.tenant_seeder_model');
 
-        $class = $this->option('class') == null ? $tenantSeederModel : 'Database\\Seeders\\Tenants\\' . $this->option('class');
+        $class = $this->option('class') == null ? $tenantSeederModel : 'Database\\Seeders\\Tenants\\'.$this->option('class');
 
         foreach ($tenants as $tenant) {
             $this->call('tenants:seed', [
