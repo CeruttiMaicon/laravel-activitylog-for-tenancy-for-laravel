@@ -35,18 +35,28 @@ return [
      * It should implement the Spatie\Activitylog\Contracts\Activity interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'activity_model' => \Spatie\Activitylog\Models\Activity::class,
+    'activity_model' => \Spatie\Activitylog\Models\MultiActivity::class,
 
     /*
      * This is the name of the table that will be created by the migration and
      * used by the Activity model shipped with this package.
      */
-    'table_name' => 'activity_log',
+    'table_name' => null,
 
     /*
      * This is the database connection that will be used by the migration and
      * the Activity model shipped with this package. In case it's not set
      * Laravel's database.default will be used instead.
      */
-    'database_connection' => env('ACTIVITY_LOGGER_DB_CONNECTION'),
+    'database_connection' => null,
+
+    /*
+     * Defining which Tenant Model is used in the implementation of Laravel for Tenancy
+     */
+    'tenant_model' => \App\Models\Tenant::class,
+
+    /*
+     * Defining which model to run all the tenant seeds of the tenant
+     */
+    'tenant_seeder_model' => \Database\Seeders\Tenants\DatabaseTenantSeeder::class,
 ];
