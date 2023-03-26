@@ -18,11 +18,15 @@ class ActivitylogServiceProvider extends PackageServiceProvider
         ->name('laravel-activitylog')
         ->hasConfigFile('activitylog')
         ->hasMigrations([
-            'create_activity_log_table',
-            'add_event_column_to_activity_log_table',
-            'add_batch_uuid_column_to_activity_log_table',
+            'tenant_logs/create_activity_log_table',
+            'tenant_logs/exec_delete_migrations_1',
+            'tenant_logs/exec_delete_migrations_2',
         ])
-        ->hasCommand(CleanActivitylogCommand::class);
+        ->hasCommand(CleanActivitylogCommand::class)
+        ->hasCommand(MultiTenantsListCommand::class)
+        ->hasCommand(MultiTenantsLogsMigrateCommand::class)
+        ->hasCommand(MultiTenantsMigrateCommand::class)
+        ->hasCommand(MultiTenantsSeedCommand::class);
     }
 
     public function registeringPackage()
