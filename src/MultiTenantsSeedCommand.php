@@ -50,6 +50,8 @@ class MultiTenantsSeedCommand extends Command
             $this->call('tenants:seed', [
                 '--tenants' => $tenant->id,
                 '--class' => $class,
+                // adicionar aqui opção do --force
+                '--force'
             ]);
         }
     }
