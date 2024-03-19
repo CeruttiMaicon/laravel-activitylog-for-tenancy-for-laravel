@@ -2,6 +2,16 @@
 
 All notable changes to `spatie/laravel-activitylog` will be documented in this file
 
+## v2.0.2 - 2024-03-19
+
+### Bug 🐛
+
+* Adjusted the `multi_tenant:seed` method in the production environment, error in parameter
+
+#### Authors
+
+@CeruttiMaicon
+
 ## v2.0.1 - 2024-03-19
 
 ### Bug 🐛
@@ -164,10 +174,15 @@ PR: [#787](https://github.com/spatie/laravel-activitylog/pull/787)
 Special thanks to [Ahmed Nagi](https://github.com/nagi1).
 
 - Drop Laravel 6 and 7 support.
+  
 - Drop PHP 7.x support.
+  
 - Add `LogOptions` configuration object to replace all configuration properties.
+  
 - Add ability to batch activity logs [#560](https://github.com/spatie/laravel-activitylog/issues/560)
+  
 - Add Pipeline to customize logged changes data.
+  
 - - Deep diff array/JSON sub-keys and respect for only-dirty, no-empty ... [#692](https://github.com/spatie/laravel-activitylog/issues/692) using new pipeline. See implementation in the tests.
   
 - 
@@ -182,6 +197,7 @@ Special thanks to [Ahmed Nagi](https://github.com/nagi1).
 - 
 - 
 - Implement a `CauserResolver` to define causer for current runtime [#582](https://github.com/spatie/laravel-activitylog/issues/582).
+  
 
 ## 3.17.0 - 2021-03-02
 
