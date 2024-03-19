@@ -1,6 +1,5 @@
 {
     "name": "cerutti-maicon/laravel-activitylog-for-tenancy-for-laravel",
-    "version": "2.0.1",
     "description": "A very simple activity logger to monitor users of your website or application by tenant, using laravel-for-tenancy",
     "license": "MIT",
     "version": "2.0.1",
