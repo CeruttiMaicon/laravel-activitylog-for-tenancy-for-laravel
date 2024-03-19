@@ -51,7 +51,7 @@ class MultiTenantsSeedCommand extends Command
                 '--tenants' => $tenant->id,
                 '--class' => $class,
                 // adicionar aqui opção do --force
-                '--force',
+                '--force' => true,
             ]);
         }
     }
