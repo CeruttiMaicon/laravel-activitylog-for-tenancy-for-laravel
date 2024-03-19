@@ -2,6 +2,16 @@
 
 All notable changes to `spatie/laravel-activitylog` will be documented in this file
 
+## v2.0.1 - 2024-03-19
+
+### Bug 🐛
+
+* Adjusted the `multi_tenant:seed` method in the production environment
+
+#### Authors
+
+@CeruttiMaicon
+
 ## 4.7.3 - 2023-01-25
 
 ### What's Changed
@@ -159,6 +169,7 @@ Special thanks to [Ahmed Nagi](https://github.com/nagi1).
 - Add ability to batch activity logs [#560](https://github.com/spatie/laravel-activitylog/issues/560)
 - Add Pipeline to customize logged changes data.
 - - Deep diff array/JSON sub-keys and respect for only-dirty, no-empty ... [#692](https://github.com/spatie/laravel-activitylog/issues/692) using new pipeline. See implementation in the tests.
+  
 - 
 - 
 - 
